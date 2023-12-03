@@ -1,24 +1,42 @@
 import http from "node:http";
+import fs from "node:fs";
 
 import { renderToString } from "react-dom/server";
 import { createElement } from "react";
 
-import App from "./App";
+import { App } from "./main";
 
-function handler(_req: http.IncomingMessage, res: http.ServerResponse) {
-  const app = createElement(App);
+function handler(req: http.IncomingMessage, res: http.ServerResponse) {
+  const { url } = req;
 
-  const html = renderToString(app);
-  console.debug("🚀 : ssr-server.ts:5: html=", html);
+  if (url === "/") {
+    const app = createElement(App);
+    const html = renderToString(app);
 
-  res.setHeader("Content-Type", "text/html");
-  res.end(html);
+    const indexHtml = fs.readFileSync("index.html", "utf8");
+    const result = indexHtml.replace("__placeholder__", html);
+
+    res.setHeader("Content-Type", "text/html");
+    res.end(result);
+    return;
+  }
+
+  if (url === "/main.js") {
+    const main = fs.readFileSync("main.js", "utf8");
+
+    res.setHeader("Content-Type", "application/javascript");
+    res.end(main);
+    return;
+  }
+
+  res.end();
+  return;
 }
 
-function main() {
-  http.createServer(handler).listen(3000);
-
-  console.log("server started!");
+function server() {
+  http.createServer(handler).listen(3000, () => {
+    console.log("server started!");
+  });
 }
 
-main();
+server();
