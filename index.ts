@@ -4,7 +4,7 @@ import fs from "node:fs";
 import { renderToString } from "react-dom/server";
 import { createElement } from "react";
 
-import { App } from "./main";
+import App from "./App";
 
 function handler(req: http.IncomingMessage, res: http.ServerResponse) {
   const { url } = req;
@@ -22,7 +22,7 @@ function handler(req: http.IncomingMessage, res: http.ServerResponse) {
   }
 
   if (url === "/main.js") {
-    const main = fs.readFileSync("main.js", "utf8");
+    const main = fs.readFileSync("dist/main.js", "utf8");
 
     res.setHeader("Content-Type", "application/javascript");
     res.end(main);
@@ -33,10 +33,8 @@ function handler(req: http.IncomingMessage, res: http.ServerResponse) {
   return;
 }
 
-function server() {
+(function server() {
   http.createServer(handler).listen(3000, () => {
     console.log("server started!");
   });
-}
-
-server();
+})();
