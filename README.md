@@ -2,9 +2,19 @@
 
 refers from: https://github.com/wikibook/react-deep-dive-example/tree/main/chapter3/ssr-example
 
-This repository show how react ssr works with small server. Not for using realworld react ssr server.
+This repository show how React SSR works with small server for understand React SSR. It can't using for real project.
 
 ```bash
 pnpm i
 bun index.ts
+
+# And check localhost:3000
 ```
+
+## How it works?
+
+Make html string by React's `renderToString` function. After user got document, entry file invoke `hydrate` function from `react-dom` package.
+
+When `hydrate` invoked, React set React things(e.g. useState, handler etc...) in to html.
+
+After `hydrate` is finished. User can interact with elements. :tada: :tada: :tada:
