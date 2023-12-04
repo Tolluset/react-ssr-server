@@ -11,10 +11,10 @@ function handler(req: http.IncomingMessage, res: http.ServerResponse) {
 
   if (url === "/") {
     const app = createElement(App);
-    const renderdString = renderToString(app);
+    const renderedString = renderToString(app);
 
     const indexHtml = fs.readFileSync("index.html", "utf8");
-    const result = indexHtml.replace("__placeholder__", renderdString);
+    const result = indexHtml.replace("__placeholder__", renderedString);
 
     res.setHeader("Content-Type", "text/html");
     res.end(result);
