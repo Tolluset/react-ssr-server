@@ -1,9 +1,10 @@
 import { createElement } from "react";
-import { hydrate } from "react-dom";
+import { hydrateRoot } from "react-dom/client";
 
 import App from "./App";
 
 (function main() {
+  const root = document.getElementById("root") as HTMLElement;
   const app = createElement(App);
-  hydrate(app, document.body);
+  hydrateRoot(root, app);
 })();

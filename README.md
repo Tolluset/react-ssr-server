@@ -13,8 +13,8 @@ bun index.ts
 
 ## How it works?
 
-Make html string by React's `renderToString` function. After user got document, entry file invoke `hydrate` function from `react-dom` package.
+Make html string by React's `renderToString` function. After user got document, entry file invoke `hydrateRoot` function from `react-dom/client` package.
 
-When `hydrate` invoked, React set React things(e.g. useState, handler etc...) in to html.
+When `hydrateRoot` invoked, React set React things(e.g. useState, handler etc...) in to html.
 
-After `hydrate` is finished. User can interact with elements. :tada: :tada: :tada:
+After `hydrateRoot` is finished. User can interact with elements. :tada: :tada: :tada:

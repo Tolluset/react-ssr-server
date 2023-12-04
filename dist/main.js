@@ -1,6 +1,7 @@
 (function main() {
+  const root = document.getElementById("root");
   const app = React.createElement(App);
-  ReactDOM.hydrate(app, document.body);
+  ReactDOM.hydrateRoot(root, app);
 })();
 
 export function App() {
@@ -17,7 +18,7 @@ export function App() {
     React.createElement(
       "button",
       { onClick: addCount },
-      `Like it ${count} times! `,
+      `Like it ${count} times!`,
     ),
   );
 }
