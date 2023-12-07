@@ -6,7 +6,7 @@ This repository show how React SSR works with small server for understand React 
 
 ```bash
 pnpm i
-bun index.ts
+pnpx tsx server.ts
 
 # And check localhost:3000
 ```
